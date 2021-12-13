@@ -16,10 +16,11 @@ class CharactersViewModel @Inject constructor(
 ): BaseViewModel(){
     fun fetchCharacters() = repository.fetchCharacters().cachedIn(viewModelScope)
 
-    var data:MutableLiveData<CharactersModel> = MutableLiveData()
+    private var _data:MutableLiveData<CharactersModel> = MutableLiveData()
+    private var data:LiveData<CharactersModel> = _data
 
     fun selectModel(model:CharactersModel){
-        data.value = model
+        _data.value = model
     }
     fun getModel():LiveData<CharactersModel>{
         return data

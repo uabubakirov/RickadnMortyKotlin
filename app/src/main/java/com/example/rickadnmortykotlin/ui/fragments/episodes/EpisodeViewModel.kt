@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.rickadnmortykotlin.base.fragment.BaseViewModel
+import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
 import com.example.rickadnmortykotlin.data.repositories.EpisodesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,10 +16,11 @@ class EpisodeViewModel @Inject constructor(private val repository: EpisodesRepos
 
     fun fetchEpisodes() = repository.fetchEpisodes().cachedIn(viewModelScope)
 
-    var data:MutableLiveData<EpisodesModel> = MutableLiveData()
+    private var _data:MutableLiveData<EpisodesModel> = MutableLiveData()
+    private var data:LiveData<EpisodesModel> = _data
 
     fun selectModel(episodesModel: EpisodesModel){
-        data.value = episodesModel
+        _data.value = episodesModel
     }
 
     fun getModel():LiveData<EpisodesModel>{

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.rickadnmortykotlin.base.fragment.BaseViewModel
+import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.data.repositories.LocationsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,10 +16,11 @@ class LocationViewModel @Inject constructor(private val repository:LocationsRepo
 
     fun fetchLocations() = repository.fetchLocations().cachedIn(viewModelScope)
 
-    var data:MutableLiveData<LocationsModel> = MutableLiveData()
+    private var _data:MutableLiveData<LocationsModel> = MutableLiveData()
+    private var data:LiveData<LocationsModel> = _data
 
     fun selectModel(locationsModel: LocationsModel){
-        data.value = locationsModel
+        _data.value = locationsModel
     }
 
     fun getModel():LiveData<LocationsModel>{

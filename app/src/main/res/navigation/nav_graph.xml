@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/characters">
+
+    <fragment
+        android:id="@+id/characters"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.characters.Characters"
+        android:label="Characters"
+        tools:layout="@layout/fragment_characters" >
+        <action
+            android:id="@+id/action_characters_to_detailCharacter"
+            app:destination="@id/detailCharacter" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodes"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.episodes.Episodes"
+        android:label="Episodes"
+        tools:layout="@layout/fragment_episodes" >
+        <action
+            android:id="@+id/action_episodes_to_detailEpisode"
+            app:destination="@id/detailEpisode" />
+    </fragment>
+    <fragment
+        android:id="@+id/locations"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.locations.Locations"
+        android:label="Locations"
+        tools:layout="@layout/fragment_locations" >
+        <action
+            android:id="@+id/action_locations_to_detailLocation"
+            app:destination="@id/detailLocation" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailCharacter"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.characters.detailCharacter.DetailCharacter"
+        android:label="{label}"
+        tools:layout="@layout/fragment_detail_character" >
+
+        <argument
+            android:name="label"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailEpisode"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.episodes.detailepisode.DetailEpisode"
+        android:label="{label}"
+        tools:layout="@layout/fragment_detail_episode" >
+        <argument
+            android:name="label"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailLocation"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.locations.detaillocation.DetailLocation"
+        android:label="{label}"
+        tools:layout="@layout/fragment_detail_location" >
+        <argument
+            android:name="label"
+            app:argType="string" />
+    </fragment>
+    <dialog
+        android:id="@+id/detailImage"
+        android:name="com.example.rickadnmortykotlin.ui.fragments.characters.detailCharacter.DetailImage"
+        android:label="fragment_detail_image"
+        tools:layout="@layout/fragment_detail_image" />
+</navigation>

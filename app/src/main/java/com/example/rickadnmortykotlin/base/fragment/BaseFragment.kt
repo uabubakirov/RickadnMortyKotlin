@@ -20,13 +20,13 @@ abstract class BaseFragment<ViewModel: BaseViewModel,Binding:ViewBinding> : Frag
         swipeRefresh()
     }
 
+    open protected fun initialize() {}
+
     open protected fun setupObservers(){}
 
     open protected fun setupRequests(){}
 
     open protected fun setupListeners(){}
-
-    open protected fun initialize() {}
 
     open protected fun swipeRefresh(){}
 

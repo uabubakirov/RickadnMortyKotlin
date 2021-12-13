@@ -22,6 +22,10 @@ class DetailCharacter : BaseFragment<CharactersViewModel, FragmentDetailCharacte
         return binding.root
     }
 
+    override fun initialize() {
+        viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
+    }
+
     override fun setupObservers() {
         viewModel.getModel().observe(viewLifecycleOwner,{
             binding.txtName.text = it.name
@@ -31,9 +35,4 @@ class DetailCharacter : BaseFragment<CharactersViewModel, FragmentDetailCharacte
             binding.imgImage.load(it.image)
         })
     }
-
-    override fun initialize() {
-        viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
-    }
-
 }

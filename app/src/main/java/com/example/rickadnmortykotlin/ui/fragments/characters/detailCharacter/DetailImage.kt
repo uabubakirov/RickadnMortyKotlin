@@ -30,15 +30,13 @@ class DetailImage : DialogFragment() {
         getData()
     }
 
+    private fun initialize() {
+        viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
+    }
+
     private fun getData() {
         viewModel.getModel().observe(viewLifecycleOwner,{
             binding.imgImage.load(it.image)
         })
     }
-
-    private fun initialize() {
-        viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
-    }
-
-
 }

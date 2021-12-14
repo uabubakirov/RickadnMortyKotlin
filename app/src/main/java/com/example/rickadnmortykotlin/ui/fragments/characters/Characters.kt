@@ -63,6 +63,7 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
         }
     }
 
+
     override fun setupListeners() {
         charactersAdapter.itemLongClick(object :OnItemLongClick{
             override fun onItemLongCLick(character: CharactersModel) {

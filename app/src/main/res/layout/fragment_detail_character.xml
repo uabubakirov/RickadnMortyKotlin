@@ -31,6 +31,17 @@
             android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
             />
+       <ImageView
+           android:id="@+id/img_indicator"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           app:layout_constraintLeft_toRightOf="@id/txt_status_desc"
+           app:layout_constraintBottom_toBottomOf="@id/txt_status_desc"
+           android:layout_marginBottom="5dp"
+           app:layout_constraintRight_toLeftOf="@id/txt_status"
+           android:src="@drawable/dead"
+           />
+
         <ImageView
             android:id="@+id/img_image"
             android:layout_width="300dp"
@@ -48,6 +59,7 @@
             app:layout_constraintLeft_toRightOf="@id/txt_status_desc"
             android:layout_marginTop="10dp"
             android:textStyle="italic"
+            android:layout_marginStart="35dp"
             tools:text="@tools:sample/lorem"
             android:textSize="19sp"
             android:layout_marginLeft="10dp"

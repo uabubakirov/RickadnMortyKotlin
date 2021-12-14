@@ -14,6 +14,7 @@ import com.example.rickadnmortykotlin.base.fragment.BaseFragment
 import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
+import com.example.rickadnmortykotlin.databinding.CharacterItemsBinding
 import com.example.rickadnmortykotlin.databinding.FragmentLocationsBinding
 import com.example.rickadnmortykotlin.ui.adapters.LocationsAdapter
 import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
@@ -25,6 +26,7 @@ import kotlinx.coroutines.launch
 class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
 
     private val locationAdapter = LocationsAdapter()
+    private lateinit var binding1 :CharacterItemsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,

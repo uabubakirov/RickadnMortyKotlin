@@ -34,10 +34,10 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
         return binding.root
     }
 
-    override fun initialize() {
-        viewModel = ViewModelProvider(requireActivity()).get(EpisodeViewModel::class.java)
-        binding.rvEpisode.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvEpisode.adapter = episodeAdapter.withLoadStateFooter(LoadStateAdapter{
+    override fun initialize() = with(binding) {
+        viewModel= ViewModelProvider(requireActivity()).get(EpisodeViewModel::class.java)
+        rvEpisode.layoutManager = LinearLayoutManager(requireContext())
+        rvEpisode.adapter = episodeAdapter.withLoadStateFooter(LoadStateAdapter{
             episodeAdapter.retry()
         })
     }
@@ -50,10 +50,10 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
         })
     }
 
-    override fun swipeRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
+    override fun swipeRefresh()=with(binding) {
+        swipeRefresh.setOnRefreshListener {
             Toast.makeText(requireContext(),"Обновлено", Toast.LENGTH_SHORT).show()
-            binding.swipeRefresh.isRefreshing = false
+            swipeRefresh.isRefreshing = false
         }
     }
 

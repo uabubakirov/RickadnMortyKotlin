@@ -44,13 +44,13 @@ class CharactersAdapter: PagingDataAdapter<CharactersModel,CharactersAdapter.Vie
     inner class ViewHolder(private val binding: CharacterItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onFill(s: CharactersModel) {
-            binding.txtName.text = s.name
-            binding.imgImage.load(s.image)
-            binding.root.setOnClickListener{
+        fun onFill(s: CharactersModel)= with(binding) {
+            txtName.text = s.name
+            imgImage.load(s.image)
+            root.setOnClickListener{
                 onItemClick.onItemCLick(s,s.name)
             }
-            binding.root.setOnLongClickListener {
+            root.setOnLongClickListener {
                 onItemLongClick.onItemLongCLick(s)
                 false
             }

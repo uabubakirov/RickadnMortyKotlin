@@ -40,10 +40,10 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
         return binding.root
     }
 
-    override fun initialize() {
+    override fun initialize()= with(binding) {
         viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
-        binding.rvCharacter.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvCharacter.adapter = charactersAdapter.withLoadStateFooter(LoadStateAdapter{
+        rvCharacter.layoutManager = LinearLayoutManager(requireContext())
+        rvCharacter.adapter = charactersAdapter.withLoadStateFooter(LoadStateAdapter{
             charactersAdapter.retry()
         })
     }
@@ -56,10 +56,10 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
         })
     }
 
-    override fun swipeRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
+    override fun swipeRefresh()= with(binding) {
+        swipeRefresh.setOnRefreshListener {
             Toast.makeText(requireContext(),"Обновлено",Toast.LENGTH_SHORT).show()
-            binding.swipeRefresh.isRefreshing = false
+            swipeRefresh.isRefreshing = false
         }
     }
 

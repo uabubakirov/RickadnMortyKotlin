@@ -26,11 +26,11 @@ class DetailLocation : BaseFragment<LocationViewModel, FragmentDetailLocationBin
         viewModel = ViewModelProvider(requireActivity()).get(LocationViewModel::class.java)
     }
 
-    override fun setupObservers() {
+    override fun setupObservers() = with(binding) {
         viewModel.getModel().observe(viewLifecycleOwner,{
-            binding.txtName.text = it.name
-            binding.txtType.text = it.type
-            binding.txtDimension.text = it.dimension
+            txtName.text = it.name
+            txtType.text = it.type
+            txtDimension.text = it.dimension
 
         })
     }

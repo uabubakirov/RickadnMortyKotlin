@@ -35,10 +35,10 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
         return binding.root
     }
 
-    override fun initialize() {
+    override fun initialize()= with(binding) {
         viewModel = ViewModelProvider(requireActivity()).get(LocationViewModel::class.java)
-        binding.rvLocation.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvLocation.adapter = locationAdapter.withLoadStateFooter(LoadStateAdapter{
+        rvLocation.layoutManager = LinearLayoutManager(requireContext())
+        rvLocation.adapter = locationAdapter.withLoadStateFooter(LoadStateAdapter{
             locationAdapter.retry()
         })
     }
@@ -51,10 +51,10 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
         })
     }
 
-    override fun swipeRefresh() {
-        binding.swipeRefresh.setOnRefreshListener {
+    override fun swipeRefresh()= with(binding) {
+        swipeRefresh.setOnRefreshListener {
             Toast.makeText(requireContext(),"Обновлено", Toast.LENGTH_SHORT).show()
-            binding.swipeRefresh.isRefreshing = false
+            swipeRefresh.isRefreshing = false
         }
     }
 

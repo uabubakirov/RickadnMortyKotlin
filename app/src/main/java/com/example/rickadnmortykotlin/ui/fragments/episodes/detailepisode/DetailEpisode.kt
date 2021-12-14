@@ -24,11 +24,11 @@ class DetailEpisode : BaseFragment<EpisodeViewModel, FragmentDetailEpisodeBindin
         viewModel = ViewModelProvider(requireActivity()).get(EpisodeViewModel::class.java)
     }
 
-    override fun setupObservers() {
+    override fun setupObservers()= with(binding) {
         viewModel.getModel().observe(viewLifecycleOwner,{
-            binding.txtName.text = it.name
-            binding.txtAirDate.text = it.air_date
-            binding.txtEpisode.text = it.episode
+            txtName.text = it.name
+            txtAirDate.text = it.air_date
+            txtEpisode.text = it.episode
         })
     }
 }

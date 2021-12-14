@@ -26,13 +26,13 @@ class DetailCharacter : BaseFragment<CharactersViewModel, FragmentDetailCharacte
         viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
     }
 
-    override fun setupObservers() {
+    override fun setupObservers()= with(binding) {
         viewModel.getModel().observe(viewLifecycleOwner,{
-            binding.txtName.text = it.name
-            binding.txtGender.text = it.gender
-            binding.txtSpecies.text = it.species
-            binding.txtStatus.text = it.status
-            binding.imgImage.load(it.image)
+            txtName.text = it.name
+            txtGender.text = it.gender
+            txtSpecies.text = it.species
+            txtStatus.text = it.status
+            imgImage.load(it.image)
         })
     }
 }

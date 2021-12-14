@@ -21,13 +21,16 @@
             android:id="@+id/txt_name"
             tools:text="@tools:sample/lorem"
             android:layout_width="wrap_content"
-            android:paddingStart="150dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
             android:textColor="@color/purple_200"
             android:textStyle="italic"
             android:textSize="24sp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/txt_name_desc"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="90dp"
             />
 
 

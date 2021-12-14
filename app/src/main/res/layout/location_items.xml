@@ -14,6 +14,9 @@
             tools:text="@tools:sample/lorem"
             android:textStyle="italic"
             android:layout_marginStart="50dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0"
             android:textSize="30sp"
             app:layout_constraintTop_toBottomOf="@id/txt_name_desc"
             app:layout_constraintLeft_toLeftOf="parent"/>

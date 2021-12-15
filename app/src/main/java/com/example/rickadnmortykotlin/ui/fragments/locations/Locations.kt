@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickadnmortykotlin.R
 import com.example.rickadnmortykotlin.base.fragment.BaseFragment
@@ -25,8 +27,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
 
-    private val locationAdapter = LocationsAdapter()
-    private lateinit var binding1 :CharacterItemsBinding
+    private val locationAdapter = LocationsAdapter(this::setupListeners)
+    override lateinit var binding: FragmentLocationsBinding
+    override val viewModel: LocationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +41,6 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
     }
 
     override fun initialize()= with(binding) {
-        viewModel = ViewModelProvider(requireActivity()).get(LocationViewModel::class.java)
         rvLocation.layoutManager = LinearLayoutManager(requireContext())
         rvLocation.adapter = locationAdapter.withLoadStateFooter(LoadStateAdapter{
             locationAdapter.retry()
@@ -60,21 +62,11 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
         }
     }
 
-    override fun setupListeners() {
-        locationAdapter.onItemCLick(object :OnItemClick{
-            override fun onItemClickLocation(location: LocationsModel, name: String) {
-                viewModel.selectModel(location)
-                Navigation.findNavController(requireView()).navigate(LocationsDirections.actionLocationsToDetailLocation(name))
-            }
-
-            override fun onItemCLick(character: CharactersModel, name: String) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onItemCLickEpisode(episode: EpisodesModel, name: String) {
-                TODO("Not yet implemented")
-            }
-        })
+    fun setupListeners(id: Int,name: String) {
+        findNavController().navigate(LocationsDirections.actionLocationsToDetailLocation(name,id))
     }
+
+
+
 
 }

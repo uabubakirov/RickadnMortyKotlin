@@ -5,9 +5,9 @@ import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 
 interface OnItemClick {
-    fun onItemCLick(character:CharactersModel,name:String)
+    fun onItemCLick(id:Int,name:String)
 
-    fun onItemCLickEpisode(episode:EpisodesModel,name:String)
+    fun onItemCLickEpisode(id:Int,name:String)
 
-    fun onItemClickLocation(location:LocationsModel,name:String)
+    fun onItemClickLocation(id:Int,name:String)
 }

@@ -8,6 +8,7 @@ import com.example.rickadnmortykotlin.base.fragment.BaseViewModel
 import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.data.repositories.CharactersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,13 +17,7 @@ class CharactersViewModel @Inject constructor(
 ): BaseViewModel(){
     fun fetchCharacters() = repository.fetchCharacters().cachedIn(viewModelScope)
 
-    private var _data:MutableLiveData<CharactersModel> = MutableLiveData()
-    private var data:LiveData<CharactersModel> = _data
-
-    fun selectModel(model:CharactersModel){
-        _data.value = model
-    }
-    fun getModel():LiveData<CharactersModel>{
-        return data
+    fun fetchCharacter(id:Int):LiveData<CharactersModel>{
+        return repository.fetchCharacter(id)
     }
 }

@@ -1,6 +1,7 @@
 package com.example.rickadnmortykotlin.ui.adapters
 
 import android.view.LayoutInflater
+
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 
@@ -9,23 +10,16 @@ import coil.load
 import com.example.rickadnmortykotlin.base.adapter.BaseComparator
 import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.databinding.CharacterItemsBinding
-import com.example.rickadnmortykotlin.utils.OnItemClick
-import com.example.rickadnmortykotlin.utils.OnItemLongClick
 
-class CharactersAdapter: PagingDataAdapter<CharactersModel,CharactersAdapter.ViewHolder>(
+
+class CharactersAdapter(
+    private val onItemClick:(id: Int,name: String)->Unit,
+    private val onLongClickListener:(image:String)-> Unit
+                        ): PagingDataAdapter<CharactersModel,CharactersAdapter.ViewHolder>(
     BaseComparator()
 ) {
 
-    private lateinit var onItemClick: OnItemClick
-    private lateinit var onItemLongClick: OnItemLongClick
 
-    fun itemClick(onItemClick2: OnItemClick){
-        onItemClick = onItemClick2
-
-    }
-    fun itemLongClick(onItemLongClick2: OnItemLongClick){
-        onItemLongClick = onItemLongClick2
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -43,18 +37,23 @@ class CharactersAdapter: PagingDataAdapter<CharactersModel,CharactersAdapter.Vie
 
     inner class ViewHolder(private val binding: CharacterItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+            itemView.setOnClickListener{
+                getItem(absoluteAdapterPosition)?.let {
+                    onItemClick(it.id,it.name)
+                }
+            }
+            itemView.setOnLongClickListener{
+                getItem(absoluteAdapterPosition)?.let {
+                    onLongClickListener(it.image)
+                }
+                false
+            }
+        }
 
         fun onFill(s: CharactersModel)= with(binding) {
             txtName.text = s.name
             imgImage.load(s.image)
-            root.setOnClickListener{
-                onItemClick.onItemCLick(s,s.name)
-            }
-            root.setOnLongClickListener {
-                onItemLongClick.onItemLongCLick(s)
-                false
-            }
-
         }
 
     }

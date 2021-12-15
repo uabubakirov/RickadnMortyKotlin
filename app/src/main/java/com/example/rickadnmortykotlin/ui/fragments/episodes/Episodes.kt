@@ -5,25 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.rickadnmortykotlin.R
 import com.example.rickadnmortykotlin.base.fragment.BaseFragment
-import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
-import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
-import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.databinding.FragmentEpisodesBinding
 import com.example.rickadnmortykotlin.ui.adapters.EpisodesAdapter
 import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
-import com.example.rickadnmortykotlin.utils.OnItemClick
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
 
-    private val episodeAdapter = EpisodesAdapter()
+    private val episodeAdapter = EpisodesAdapter(this::setupListeners)
+    override lateinit var binding: FragmentEpisodesBinding
+    override val viewModel: EpisodeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +32,6 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
     }
 
     override fun initialize() = with(binding) {
-        viewModel= ViewModelProvider(requireActivity()).get(EpisodeViewModel::class.java)
         rvEpisode.layoutManager = LinearLayoutManager(requireContext())
         rvEpisode.adapter = episodeAdapter.withLoadStateFooter(LoadStateAdapter{
             episodeAdapter.retry()
@@ -57,20 +53,13 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
         }
     }
 
-    override fun setupListeners() {
-        episodeAdapter.onItemClick(object:OnItemClick {
-            override fun onItemCLickEpisode(episode: EpisodesModel, name: String) {
-                viewModel.selectModel(episode)
-                Navigation.findNavController(requireView()).navigate(EpisodesDirections.actionEpisodesToDetailEpisode(name))
-            }
+    fun setupListeners(id:Int,name: String) {
+        findNavController().navigate(EpisodesDirections.actionEpisodesToDetailEpisode(name,id))
 
-            override fun onItemCLick(character: CharactersModel, name: String) {
-                TODO("Not yet implemented")
-            }
-            override fun onItemClickLocation(location: LocationsModel, name: String) {
-                TODO("Not yet implemented")
-            }
-        })
+
     }
+
+
+
 
 }

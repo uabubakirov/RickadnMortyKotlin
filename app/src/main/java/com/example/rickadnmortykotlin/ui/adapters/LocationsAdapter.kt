@@ -7,17 +7,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickadnmortykotlin.base.adapter.BaseComparator
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.databinding.LocationItemsBinding
-import com.example.rickadnmortykotlin.utils.OnItemClick
 
-class LocationsAdapter : PagingDataAdapter<LocationsModel, LocationsAdapter.LocationsViewHolder>(
+
+class LocationsAdapter(
+    private val onItemClick:(id: Int,name:String)->Unit,
+) : PagingDataAdapter<LocationsModel, LocationsAdapter.LocationsViewHolder>(
     BaseComparator()
 ) {
 
-    private lateinit var onItemClick:OnItemClick
-
-    fun onItemCLick(click:OnItemClick){
-        onItemClick = click
-    }
 
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) {
         getItem(position)?.let {
@@ -30,11 +27,16 @@ class LocationsAdapter : PagingDataAdapter<LocationsModel, LocationsAdapter.Loca
     }
 
    inner class LocationsViewHolder(private val binding: LocationItemsBinding):RecyclerView.ViewHolder(binding.root) {
+
+       init {
+           itemView.setOnClickListener {
+               getItem(absoluteAdapterPosition)?.let {
+                   onItemClick(it.id,it.name)
+               }
+           }}
+
        fun onFill(s: LocationsModel) = with(binding) {
            txtName.text = s.name
-           root.setOnClickListener{
-               onItemClick.onItemClickLocation(s,s.name)
-           }
        }
 
    }

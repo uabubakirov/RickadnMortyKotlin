@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickadnmortykotlin.base.fragment.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentDetailEpisodeBinding
 import com.example.rickadnmortykotlin.ui.fragments.episodes.EpisodeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailEpisode : BaseFragment<EpisodeViewModel, FragmentDetailEpisodeBinding>() {
+
+    override lateinit var binding: FragmentDetailEpisodeBinding
+    override val viewModel: EpisodeViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -20,15 +26,12 @@ class DetailEpisode : BaseFragment<EpisodeViewModel, FragmentDetailEpisodeBindin
         return binding.root
     }
 
-    override fun initialize() {
-        viewModel = ViewModelProvider(requireActivity()).get(EpisodeViewModel::class.java)
-    }
-
     override fun setupObservers()= with(binding) {
-        viewModel.getModel().observe(viewLifecycleOwner,{
+        viewModel.fetchEpisode(DetailEpisodeArgs.fromBundle(requireArguments()).id).observe(viewLifecycleOwner,{
             txtName.text = it.name
-            txtAirDate.text = it.air_date
             txtEpisode.text = it.episode
+            txtAirDate.text = it.air_date
         })
     }
+
 }

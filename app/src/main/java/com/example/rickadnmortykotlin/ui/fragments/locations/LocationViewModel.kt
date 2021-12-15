@@ -16,14 +16,8 @@ class LocationViewModel @Inject constructor(private val repository:LocationsRepo
 
     fun fetchLocations() = repository.fetchLocations().cachedIn(viewModelScope)
 
-    private var _data:MutableLiveData<LocationsModel> = MutableLiveData()
-    private var data:LiveData<LocationsModel> = _data
-
-    fun selectModel(locationsModel: LocationsModel){
-        _data.value = locationsModel
+    fun fetchLocation(id: Int):LiveData<LocationsModel>{
+        return repository.fetchLocation(id)
     }
 
-    fun getModel():LiveData<LocationsModel>{
-        return data
-    }
 }

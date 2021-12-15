@@ -16,14 +16,9 @@ class EpisodeViewModel @Inject constructor(private val repository: EpisodesRepos
 
     fun fetchEpisodes() = repository.fetchEpisodes().cachedIn(viewModelScope)
 
-    private var _data:MutableLiveData<EpisodesModel> = MutableLiveData()
-    private var data:LiveData<EpisodesModel> = _data
-
-    fun selectModel(episodesModel: EpisodesModel){
-        _data.value = episodesModel
+    fun fetchEpisode(id:Int):LiveData<EpisodesModel> {
+        return repository.fetchEpisode(id)
     }
 
-    fun getModel():LiveData<EpisodesModel>{
-        return data
-    }
+
 }

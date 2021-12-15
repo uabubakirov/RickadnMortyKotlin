@@ -12,5 +12,5 @@ interface CharactersApi {
     suspend fun fetchCharacters(@Query("page") page:Int):RickAndMortyResponse<CharactersModel>
 
     @GET("/api/character/{id}")
-    suspend fun fetchCharacter(@Path("id")id:Int):Call<CharactersModel>
+    fun fetchCharacter(@Path("id")id:Int):Call<CharactersModel>
 }

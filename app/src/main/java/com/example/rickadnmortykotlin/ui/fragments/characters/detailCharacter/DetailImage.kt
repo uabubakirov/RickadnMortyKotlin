@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.rickadnmortykotlin.databinding.FragmentDetailImageBinding
 import com.example.rickadnmortykotlin.ui.fragments.characters.CharactersViewModel
@@ -13,14 +15,15 @@ import com.example.rickadnmortykotlin.ui.fragments.characters.CharactersViewMode
 
 class DetailImage : DialogFragment() {
 
-    private lateinit var binding:FragmentDetailImageBinding
-    private lateinit var viewModel:CharactersViewModel
+    private lateinit var binding: FragmentDetailImageBinding
+    private val viewModel: CharactersViewModel by viewModels()
+    private val args:DetailImageArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDetailImageBinding.inflate(inflater,container,false)
+        binding = FragmentDetailImageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -31,12 +34,9 @@ class DetailImage : DialogFragment() {
     }
 
     private fun initialize() {
-        viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
     }
 
     private fun getData() {
-        viewModel.getModel().observe(viewLifecycleOwner,{
-            binding.imgImage.load(it.image)
-        })
+        binding.imgImage.load(args.image)
     }
 }

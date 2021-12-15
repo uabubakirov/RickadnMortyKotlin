@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_characters_to_detailCharacter"
             app:destination="@id/detailCharacter" />
+        <action
+            android:id="@+id/action_characters_to_detailImage"
+            app:destination="@id/detailImage" />
     </fragment>
     <fragment
         android:id="@+id/episodes"
@@ -41,6 +44,9 @@
         <argument
             android:name="label"
             app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailEpisode"
@@ -50,6 +56,9 @@
         <argument
             android:name="label"
             app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/detailLocation"
@@ -59,10 +68,17 @@
         <argument
             android:name="label"
             app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <dialog
         android:id="@+id/detailImage"
         android:name="com.example.rickadnmortykotlin.ui.fragments.characters.detailCharacter.DetailImage"
         android:label="fragment_detail_image"
-        tools:layout="@layout/fragment_detail_image" />
+        tools:layout="@layout/fragment_detail_image" >
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </dialog>
 </navigation>

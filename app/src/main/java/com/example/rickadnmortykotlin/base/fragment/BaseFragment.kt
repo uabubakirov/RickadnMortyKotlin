@@ -6,31 +6,29 @@ import android.view.View
 import androidx.viewbinding.ViewBinding
 
 
-abstract class BaseFragment<ViewModel: BaseViewModel,Binding:ViewBinding> : Fragment() {
+abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding> : Fragment() {
 
-    protected lateinit var binding:Binding
-    protected lateinit var viewModel: ViewModel
+    protected abstract val  binding: Binding
+    protected abstract val  viewModel: ViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
-        setupListeners()
+
         setupObservers()
         setupRequests()
         swipeRefresh()
     }
 
 
+    open fun initialize() {}
 
-    open protected fun initialize() {}
+    open fun setupObservers() {}
 
-    open protected fun setupObservers(){}
+    open fun setupRequests() {}
 
-    open protected fun setupRequests(){}
 
-    open protected fun setupListeners(){}
-
-    open protected fun swipeRefresh(){}
+    open fun swipeRefresh() {}
 
 
 }

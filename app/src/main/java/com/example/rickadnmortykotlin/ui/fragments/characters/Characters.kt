@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.rickadnmortykotlin.R
 
@@ -26,24 +28,29 @@ import com.example.rickadnmortykotlin.utils.OnItemClick
 import com.example.rickadnmortykotlin.utils.OnItemLongClick
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 @AndroidEntryPoint
 class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>() {
 
-    private val charactersAdapter = CharactersAdapter()
+    private val charactersAdapter =
+        CharactersAdapter(this::setupListeners, this::setupLongListeners)
+    override lateinit var binding: FragmentCharactersBinding
+    override val viewModel: CharactersViewModel by viewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCharactersBinding.inflate(inflater,container,false)
+        binding = FragmentCharactersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun initialize()= with(binding) {
-        viewModel = ViewModelProvider(requireActivity()).get(CharactersViewModel::class.java)
+
+    override fun initialize() = with(binding) {
         rvCharacter.layoutManager = LinearLayoutManager(requireContext())
-        rvCharacter.adapter = charactersAdapter.withLoadStateFooter(LoadStateAdapter{
+        rvCharacter.adapter = charactersAdapter.withLoadStateFooter(LoadStateAdapter {
             charactersAdapter.retry()
         })
     }
@@ -56,37 +63,26 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
         })
     }
 
-    override fun swipeRefresh()= with(binding) {
+    override fun swipeRefresh() = with(binding) {
         swipeRefresh.setOnRefreshListener {
-            Toast.makeText(requireContext(),"Обновлено",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Обновлено", Toast.LENGTH_SHORT).show()
             swipeRefresh.isRefreshing = false
         }
     }
 
 
-    override fun setupListeners() {
-        charactersAdapter.itemLongClick(object :OnItemLongClick{
-            override fun onItemLongCLick(character: CharactersModel) {
-                viewModel.selectModel(character)
-                Navigation.findNavController(requireView()).navigate(R.id.detailImage)
-            }
-
-        })
-        charactersAdapter.itemClick(object :OnItemClick{
-            override fun onItemCLick(character: CharactersModel, name: String) {
-                viewModel.selectModel(character)
-                Navigation.findNavController(requireView()).navigate(CharactersDirections.actionCharactersToDetailCharacter(name))
-            }
-
-            override fun onItemCLickEpisode(episode: EpisodesModel, name: String) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onItemClickLocation(location: LocationsModel, name: String) {
-                TODO("Not yet implemented")
-            }
-
-
-        })
+    private fun setupListeners(id: Int, name: String) {
+        findNavController().navigate(
+            CharactersDirections.actionCharactersToDetailCharacter(
+                name,
+                id
+            )
+        )
     }
+
+    private fun setupLongListeners(image: String) {
+        findNavController().navigate(CharactersDirections.actionCharactersToDetailImage(image))
+    }
+
+
 }

@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.example.rickadnmortykotlin.base.fragment.BaseFragment
+import com.example.rickadnmortykotlin.common.base.BaseFragment
+import com.example.rickadnmortykotlin.common.resource.Resource
 import com.example.rickadnmortykotlin.databinding.FragmentDetailEpisodeBinding
 import com.example.rickadnmortykotlin.ui.fragments.episodes.EpisodeViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +30,23 @@ class DetailEpisode : BaseFragment<EpisodeViewModel, FragmentDetailEpisodeBindin
 
     override fun setupObservers()= with(binding) {
         viewModel.fetchEpisode(DetailEpisodeArgs.fromBundle(requireArguments()).id).observe(viewLifecycleOwner,{
-            txtName.text = it.name
-            txtEpisode.text = it.episode
-            txtAirDate.text = it.air_date
+            progressBar.isVisible = it is Resource.Loading
+            group.isVisible = it !is Resource.Loading
+            when(it){
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(),it.message, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    it.data?.let { data ->
+                        txtName.text = data.name
+                        txtAirDate.text = data.air_date
+                        txtEpisode.text = data.episode
+                    }
+                }
+            }
         })
     }
 

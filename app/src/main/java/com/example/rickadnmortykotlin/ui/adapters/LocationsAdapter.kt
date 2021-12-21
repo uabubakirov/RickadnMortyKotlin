@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickadnmortykotlin.base.adapter.BaseComparator
+import com.example.rickadnmortykotlin.common.base.BaseComparator
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.databinding.LocationItemsBinding
 

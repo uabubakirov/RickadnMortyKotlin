@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 
-import com.example.rickadnmortykotlin.base.fragment.BaseFragment
+import com.example.rickadnmortykotlin.common.base.BaseFragment
 
 
 import com.example.rickadnmortykotlin.databinding.FragmentCharactersBinding
@@ -45,6 +47,11 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
         rvCharacter.adapter = charactersAdapter.withLoadStateFooter(LoadStateAdapter {
             charactersAdapter.retry()
         })
+        charactersAdapter.addLoadStateListener { loadStates ->
+            rvCharacter.isVisible = loadStates.refresh is LoadState.NotLoading
+            progressBar.isVisible = loadStates.refresh is LoadState.Loading
+        }
+
     }
 
     override fun setupRequests() {
@@ -57,8 +64,10 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
 
     override fun swipeRefresh() = with(binding) {
         swipeRefresh.setOnRefreshListener {
+            charactersAdapter.refresh()
             Toast.makeText(requireContext(), "Обновлено", Toast.LENGTH_SHORT).show()
             swipeRefresh.isRefreshing = false
+
         }
     }
 
@@ -66,8 +75,7 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
     private fun setupListeners(id: Int, name: String) {
         findNavController().navigate(
             CharactersDirections.actionCharactersToDetailCharacter(
-                name,
-                id
+                name,id
             )
         )
     }

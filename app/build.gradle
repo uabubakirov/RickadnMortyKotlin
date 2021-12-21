@@ -74,10 +74,19 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
+    //Fragment
+    def fragmentVersion = "1.4.0"
+    implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
+
+
+
+
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     //Coil
     implementation "io.coil-kt:coil:1.3.2"
+    //Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-RC")
 }

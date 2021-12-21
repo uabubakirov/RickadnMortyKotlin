@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.example.rickadnmortykotlin.base.fragment.BaseViewModel
+import com.example.rickadnmortykotlin.common.base.BaseViewModel
 import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.data.repositories.CharactersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,10 +14,14 @@ import javax.inject.Inject
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
     private val repository: CharactersRepository
-): BaseViewModel(){
+): BaseViewModel() {
     fun fetchCharacters() = repository.fetchCharacters().cachedIn(viewModelScope)
 
-    fun fetchCharacter(id:Int):LiveData<CharactersModel>{
-        return repository.fetchCharacter(id)
-    }
+    private val _character = MutableLiveData<CharactersModel>()
+    val character: LiveData<CharactersModel> = _character
+
+
+    fun fetchCharacter(id: Int) = repository.fetchCharacter(id)
+
+
 }

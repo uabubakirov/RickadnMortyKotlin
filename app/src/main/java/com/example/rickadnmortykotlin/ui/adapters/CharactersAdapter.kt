@@ -7,7 +7,7 @@ import androidx.paging.PagingDataAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.rickadnmortykotlin.base.adapter.BaseComparator
+import com.example.rickadnmortykotlin.common.base.BaseComparator
 import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.databinding.CharacterItemsBinding
 

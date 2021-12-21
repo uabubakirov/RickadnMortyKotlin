@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.base.fragment
+package com.example.rickadnmortykotlin.common.base
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,7 +26,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding> : 
     open fun setupObservers() {}
 
     open fun setupRequests() {}
-
 
     open fun swipeRefresh() {}
 

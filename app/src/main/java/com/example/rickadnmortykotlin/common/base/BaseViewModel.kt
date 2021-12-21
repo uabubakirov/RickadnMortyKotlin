@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.base.fragment
+package com.example.rickadnmortykotlin.common.base
 
 import androidx.lifecycle.ViewModel
 

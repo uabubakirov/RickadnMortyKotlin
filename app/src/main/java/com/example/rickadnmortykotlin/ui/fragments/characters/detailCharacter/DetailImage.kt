@@ -16,7 +16,6 @@ import com.example.rickadnmortykotlin.ui.fragments.characters.CharactersViewMode
 class DetailImage : DialogFragment() {
 
     private lateinit var binding: FragmentDetailImageBinding
-    private val viewModel: CharactersViewModel by viewModels()
     private val args:DetailImageArgs by navArgs()
 
     override fun onCreateView(
@@ -29,11 +28,7 @@ class DetailImage : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initialize()
         getData()
-    }
-
-    private fun initialize() {
     }
 
     private fun getData() {

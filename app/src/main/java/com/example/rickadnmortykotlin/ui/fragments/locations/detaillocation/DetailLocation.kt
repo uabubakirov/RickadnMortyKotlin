@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.example.rickadnmortykotlin.base.fragment.BaseFragment
+import com.example.rickadnmortykotlin.common.base.BaseFragment
+import com.example.rickadnmortykotlin.common.resource.Resource
 import com.example.rickadnmortykotlin.databinding.FragmentDetailLocationBinding
 import com.example.rickadnmortykotlin.ui.fragments.locations.LocationViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,13 +31,23 @@ class DetailLocation : BaseFragment<LocationViewModel, FragmentDetailLocationBin
 
     override fun setupObservers() = with(binding) {
         viewModel.fetchLocation(DetailLocationArgs.fromBundle(requireArguments()).id).observe(viewLifecycleOwner,{
-            txtType.text = it.type
-            txtName.text = it.name
-            txtDimension.text = it.dimension
+            progressBar.isVisible = it is Resource.Loading
+            group.isVisible = it !is Resource.Loading
+            when(it){
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(),it.message, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    it.data?.let{data ->
+                        txtType.text = data.type
+                        txtName.text = data.name
+                        txtDimension.text = data.dimension
+                    }
+
+                }
+            }
+
         })
     }
-
-
-
-
 }

@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.base.pagging
+package com.example.rickadnmortykotlin.common.base
 
 import android.net.Uri
 import androidx.paging.PagingSource
@@ -7,7 +7,7 @@ import com.example.rickadnmortykotlin.data.network.dtos.RickAndMortyResponse
 import retrofit2.HttpException
 import java.io.IOException
 
-abstract class BasePaging<T:Any>(
+abstract class BasePaging<T:Any, U>(
     private val request: suspend (position:Int) -> RickAndMortyResponse<T>
 ): PagingSource<Int, T>() {
 

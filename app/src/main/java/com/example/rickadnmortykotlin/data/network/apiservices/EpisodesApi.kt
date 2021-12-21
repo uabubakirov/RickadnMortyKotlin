@@ -13,5 +13,5 @@ interface EpisodesApi {
     suspend fun fetchEpisodes(@Query("page")page:Int):RickAndMortyResponse<EpisodesModel>
 
     @GET("/api/episode/{id}")
-    fun fetchEpisode(@Path("id")id:Int): Call<EpisodesModel>
+    suspend fun fetchEpisode(@Path("id")id:Int): EpisodesModel
 }

@@ -13,5 +13,5 @@ interface LocationApi {
     suspend fun fetchLocations(@Query("page")page:Int):RickAndMortyResponse<LocationsModel>
 
     @GET("/api/location/{id}")
-    fun fetchLocation(@Path("id")id:Int): Call<LocationsModel>
+    suspend fun fetchLocation(@Path("id")id:Int): LocationsModel
 }

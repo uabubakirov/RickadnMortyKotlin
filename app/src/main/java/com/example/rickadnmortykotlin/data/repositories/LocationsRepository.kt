@@ -6,6 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.example.rickadnmortykotlin.common.base.BaseRepository
 import com.example.rickadnmortykotlin.data.network.apiservices.LocationApi
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.data.network.pagingsources.CharacterPaging
@@ -16,7 +17,7 @@ import retrofit2.Response
 import java.util.concurrent.CompletionService
 import javax.inject.Inject
 
-class LocationsRepository @Inject constructor(private val service: LocationApi) {
+class LocationsRepository @Inject constructor(private val service: LocationApi):BaseRepository() {
 
     fun fetchLocations():LiveData<PagingData<LocationsModel>>{
         return Pager(
@@ -28,23 +29,7 @@ class LocationsRepository @Inject constructor(private val service: LocationApi) 
             }
         ).liveData
     }
-    fun fetchLocation(id: Int):LiveData<LocationsModel>{
-        var data: MutableLiveData<LocationsModel> = MutableLiveData()
-        service.fetchLocation(id).enqueue(object : Callback<LocationsModel>{
-            override fun onResponse(
-                call: Call<LocationsModel>,
-                response: Response<LocationsModel>
-            ) {
-                if (response.isSuccessful){
-                    data.value = response.body()
-                }
-            }
-
-            override fun onFailure(call: Call<LocationsModel>, t: Throwable) {
-                data.value = null
-            }
-
-        })
-        return data
+    fun fetchLocation(id: Int) = doRequest {
+        service.fetchLocation(id)
     }
 }

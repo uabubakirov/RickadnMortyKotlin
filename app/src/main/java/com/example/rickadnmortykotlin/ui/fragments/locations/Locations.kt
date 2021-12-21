@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.rickadnmortykotlin.base.fragment.BaseFragment
+import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentLocationsBinding
 import com.example.rickadnmortykotlin.ui.adapters.LocationsAdapter
 import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
@@ -37,6 +39,10 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
         rvLocation.adapter = locationAdapter.withLoadStateFooter(LoadStateAdapter{
             locationAdapter.retry()
         })
+        locationAdapter.addLoadStateListener { loadStates ->
+            rvLocation.isVisible = loadStates.refresh is LoadState.NotLoading
+            progressBar.isVisible = loadStates.refresh is LoadState.Loading
+        }
     }
 
     override fun setupRequests() {
@@ -49,7 +55,8 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
 
     override fun swipeRefresh()= with(binding) {
         swipeRefresh.setOnRefreshListener {
-            Toast.makeText(requireContext(),"Обновлено", Toast.LENGTH_SHORT).show()
+            locationAdapter.refresh()
+            Toast.makeText(requireContext(), "Обновлено", Toast.LENGTH_SHORT).show()
             swipeRefresh.isRefreshing = false
         }
     }

@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.base.adapter
+package com.example.rickadnmortykotlin.common.base
 
 interface IBaseDiffModel {
 

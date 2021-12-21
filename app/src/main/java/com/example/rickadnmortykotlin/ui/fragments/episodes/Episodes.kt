@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.rickadnmortykotlin.base.fragment.BaseFragment
+import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentEpisodesBinding
 import com.example.rickadnmortykotlin.ui.adapters.EpisodesAdapter
 import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
@@ -36,6 +38,10 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
         rvEpisode.adapter = episodeAdapter.withLoadStateFooter(LoadStateAdapter{
             episodeAdapter.retry()
         })
+        episodeAdapter.addLoadStateListener { loadStates ->
+            rvEpisode.isVisible = loadStates.refresh is LoadState.NotLoading
+            progressBar.isVisible = loadStates.refresh is LoadState.Loading
+        }
     }
 
     override fun setupRequests() {
@@ -48,7 +54,8 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
 
     override fun swipeRefresh()=with(binding) {
         swipeRefresh.setOnRefreshListener {
-            Toast.makeText(requireContext(),"Обновлено", Toast.LENGTH_SHORT).show()
+            episodeAdapter.refresh()
+            Toast.makeText(requireContext(), "Обновлено", Toast.LENGTH_SHORT).show()
             swipeRefresh.isRefreshing = false
         }
     }

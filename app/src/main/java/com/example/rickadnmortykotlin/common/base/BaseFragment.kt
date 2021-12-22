@@ -14,7 +14,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel, Binding : ViewBinding> : 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initialize()
-
         setupObservers()
         setupRequests()
         swipeRefresh()

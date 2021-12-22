@@ -67,7 +67,6 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
             charactersAdapter.refresh()
             Toast.makeText(requireContext(), "Обновлено", Toast.LENGTH_SHORT).show()
             swipeRefresh.isRefreshing = false
-
         }
     }
 

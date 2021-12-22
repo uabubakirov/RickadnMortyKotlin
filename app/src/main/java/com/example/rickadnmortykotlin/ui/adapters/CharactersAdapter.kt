@@ -13,7 +13,7 @@ import com.example.rickadnmortykotlin.databinding.CharacterItemsBinding
 
 
 class CharactersAdapter(
-    private val onItemClick:(id: Int,name: String)->Unit,
+    private val onItemClick:(id: Int,name: String)-> Unit,
     private val onLongClickListener:(image:String)-> Unit
                         ): PagingDataAdapter<CharactersModel,CharactersAdapter.ViewHolder>(
     BaseComparator()

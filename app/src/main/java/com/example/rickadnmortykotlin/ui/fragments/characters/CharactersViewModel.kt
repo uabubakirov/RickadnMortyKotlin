@@ -17,10 +17,6 @@ class CharactersViewModel @Inject constructor(
 ): BaseViewModel() {
     fun fetchCharacters() = repository.fetchCharacters().cachedIn(viewModelScope)
 
-    private val _character = MutableLiveData<CharactersModel>()
-    val character: LiveData<CharactersModel> = _character
-
-
     fun fetchCharacter(id: Int) = repository.fetchCharacter(id)
 
 

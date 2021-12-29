@@ -1,12 +1,14 @@
-package com.example.rickadnmortykotlin.ui.fragments.episodes
+package com.example.rickadnmortykotlin.presentation.ui.fragments.episodes
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.rickadnmortykotlin.common.base.BaseViewModel
 import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
 import com.example.rickadnmortykotlin.data.repositories.EpisodesRepository
+import com.example.rickadnmortykotlin.presentation.state.UIState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -14,7 +16,13 @@ class EpisodeViewModel @Inject constructor(private val repository: EpisodesRepos
 
     fun fetchEpisodes() = repository.fetchEpisodes().cachedIn(viewModelScope)
 
-    fun fetchEpisode(id:Int) = repository.fetchEpisode(id)
+    private val _dataEpisode = MutableStateFlow<UIState<EpisodesModel>>(UIState.Loading())
+    val dataEpisode: StateFlow<UIState<EpisodesModel>> = _dataEpisode
+
+    fun fetchEpisode(id:Int) {
+        _dataEpisode.subscribeTo {
+            repository.fetchEpisode(id) }
+    }
 
 
 }

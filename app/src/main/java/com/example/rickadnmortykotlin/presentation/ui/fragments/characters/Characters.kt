@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.ui.fragments.characters
+package com.example.rickadnmortykotlin.presentation.ui.fragments.characters
 
 import android.os.Bundle
 
@@ -8,38 +8,34 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.rickadnmortykotlin.R
 
 import com.example.rickadnmortykotlin.common.base.BaseFragment
+import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 
 
 import com.example.rickadnmortykotlin.databinding.FragmentCharactersBinding
-import com.example.rickadnmortykotlin.ui.adapters.CharactersAdapter
-import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
+import com.example.rickadnmortykotlin.presentation.ui.adapters.CharactersAdapter
+import com.example.rickadnmortykotlin.presentation.ui.adapters.paging.LoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>() {
+class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(R.layout.fragment_characters) {
 
     private val charactersAdapter =
         CharactersAdapter(this::setupListeners, this::setupLongListeners)
-    override lateinit var binding: FragmentCharactersBinding
+    override val binding by viewBinding(FragmentCharactersBinding::bind)
     override val viewModel: CharactersViewModel by viewModels()
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentCharactersBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
 
     override fun initialize() = with(binding) {
@@ -52,17 +48,20 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
             progressBar.isVisible = loadStates.refresh is LoadState.Loading
         }
 
+        
     }
 
     override fun setupRequests() {
-        viewModel.fetchCharacters().observe(viewLifecycleOwner, {
-            viewLifecycleOwner.lifecycleScope.launch {
-                charactersAdapter.submitData(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+        viewModel.fetchCharacters().collectLatest{
+            charactersAdapter.submitData(it)
+
             }
-        })
+        }
     }
 
-    override fun swipeRefresh() = with(binding) {
+
+    override fun swipeRefresh()= with (binding) {
         swipeRefresh.setOnRefreshListener {
             charactersAdapter.refresh()
             Toast.makeText(requireContext(), "Обновлено", Toast.LENGTH_SHORT).show()
@@ -82,6 +81,8 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
     private fun setupLongListeners(image: String) {
         findNavController().navigate(CharactersDirections.actionCharactersToDetailImage(image))
     }
+
+
 
 
 }

@@ -11,6 +11,7 @@ import com.example.rickadnmortykotlin.data.network.apiservices.LocationApi
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.data.network.pagingsources.CharacterPaging
 import com.example.rickadnmortykotlin.data.network.pagingsources.LocationPaging
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 class LocationsRepository @Inject constructor(private val service: LocationApi):BaseRepository() {
 
-    fun fetchLocations():LiveData<PagingData<LocationsModel>>{
+    fun fetchLocations():Flow<PagingData<LocationsModel>>{
         return Pager(
             config = PagingConfig(
                 pageSize = 10
@@ -27,7 +28,7 @@ class LocationsRepository @Inject constructor(private val service: LocationApi):
             pagingSourceFactory = {
                 LocationPaging(service)
             }
-        ).liveData
+        ).flow
     }
     fun fetchLocation(id: Int) = doRequest {
         service.fetchLocation(id)

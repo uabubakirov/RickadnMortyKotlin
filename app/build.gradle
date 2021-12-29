@@ -78,8 +78,16 @@ dependencies {
     def fragmentVersion = "1.4.0"
     implementation("androidx.fragment:fragment-ktx:$fragmentVersion")
 
+    //binding
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.5.3'
 
+    // Lifecycle
+    def lifecycle_version = "2.4.0"
 
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    // ViewModel
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
 
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
@@ -89,4 +97,6 @@ dependencies {
     implementation "io.coil-kt:coil:1.3.2"
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0-RC")
+
+
 }

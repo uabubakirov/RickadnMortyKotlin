@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.ui.adapters.paging
+package com.example.rickadnmortykotlin.presentation.ui.adapters.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

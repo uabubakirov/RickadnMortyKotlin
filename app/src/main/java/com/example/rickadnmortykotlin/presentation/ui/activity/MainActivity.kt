@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.ui.activity
+package com.example.rickadnmortykotlin.presentation.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

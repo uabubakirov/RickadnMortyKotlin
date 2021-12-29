@@ -1,9 +1,5 @@
-package com.example.rickadnmortykotlin.ui.fragments.locations
+package com.example.rickadnmortykotlin.presentation.ui.fragments.locations
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -11,28 +7,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.rickadnmortykotlin.R
 import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentLocationsBinding
-import com.example.rickadnmortykotlin.ui.adapters.LocationsAdapter
-import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
+import com.example.rickadnmortykotlin.presentation.ui.adapters.LocationsAdapter
+import com.example.rickadnmortykotlin.presentation.ui.adapters.paging.LoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
+class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>(R.layout.fragment_locations) {
 
     private val locationAdapter = LocationsAdapter(this::setupListeners)
-    override lateinit var binding: FragmentLocationsBinding
+    override val binding: FragmentLocationsBinding by viewBinding()
     override val viewModel: LocationViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentLocationsBinding.inflate(inflater,container,false)
-        return binding.root
-    }
 
     override fun initialize()= with(binding) {
         rvLocation.layoutManager = LinearLayoutManager(requireContext())
@@ -46,11 +37,11 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>() {
     }
 
     override fun setupRequests() {
-        viewModel.fetchLocations().observe(viewLifecycleOwner, {
-            viewLifecycleOwner.lifecycleScope.launch {
-                locationAdapter.submitData(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+        viewModel.fetchLocations().collectLatest {
+            locationAdapter.submitData(it)
             }
-        })
+        }
     }
 
     override fun swipeRefresh()= with(binding) {

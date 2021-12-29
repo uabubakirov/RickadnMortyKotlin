@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.ui.adapters
+package com.example.rickadnmortykotlin.presentation.ui.adapters
 
 import android.view.LayoutInflater
 

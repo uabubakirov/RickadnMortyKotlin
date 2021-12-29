@@ -1,9 +1,5 @@
-package com.example.rickadnmortykotlin.ui.fragments.episodes
+package com.example.rickadnmortykotlin.presentation.ui.fragments.episodes
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -11,27 +7,21 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.rickadnmortykotlin.R
 import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentEpisodesBinding
-import com.example.rickadnmortykotlin.ui.adapters.EpisodesAdapter
-import com.example.rickadnmortykotlin.ui.adapters.paging.LoadStateAdapter
+import com.example.rickadnmortykotlin.presentation.ui.adapters.EpisodesAdapter
+import com.example.rickadnmortykotlin.presentation.ui.adapters.paging.LoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 @AndroidEntryPoint
-class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
+class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>(R.layout.fragment_episodes) {
 
     private val episodeAdapter = EpisodesAdapter(this::setupListeners)
-    override lateinit var binding: FragmentEpisodesBinding
+    override val binding: FragmentEpisodesBinding by viewBinding()
     override val viewModel: EpisodeViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentEpisodesBinding.inflate(inflater,container,false)
-        return binding.root
-    }
 
     override fun initialize() = with(binding) {
         rvEpisode.layoutManager = LinearLayoutManager(requireContext())
@@ -45,11 +35,11 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>() {
     }
 
     override fun setupRequests() {
-        viewModel.fetchEpisodes().observe(viewLifecycleOwner, {
-            viewLifecycleOwner.lifecycleScope.launch {
-                episodeAdapter.submitData(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+        viewModel.fetchEpisodes().collectLatest {
+            episodeAdapter.submitData(it)
             }
-        })
+        }
     }
 
     override fun swipeRefresh()=with(binding) {

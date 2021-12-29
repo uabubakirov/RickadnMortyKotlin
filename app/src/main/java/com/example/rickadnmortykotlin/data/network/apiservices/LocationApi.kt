@@ -1,9 +1,7 @@
 package com.example.rickadnmortykotlin.data.network.apiservices
 
 import com.example.rickadnmortykotlin.data.network.dtos.RickAndMortyResponse
-import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
 import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

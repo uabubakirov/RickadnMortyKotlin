@@ -2,7 +2,6 @@ package com.example.rickadnmortykotlin.presentation.ui.fragments.locations
 
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -13,17 +12,16 @@ import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentLocationsBinding
 import com.example.rickadnmortykotlin.presentation.ui.adapters.LocationsAdapter
 import com.example.rickadnmortykotlin.presentation.ui.adapters.paging.LoadStateAdapter
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
+
 class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>(R.layout.fragment_locations) {
 
     private val locationAdapter = LocationsAdapter(this::setupListeners)
     override val binding: FragmentLocationsBinding by viewBinding()
-    override val viewModel: LocationViewModel by viewModels()
-
+    override val viewModel: LocationViewModel by viewModel()
 
     override fun initialize()= with(binding) {
         rvLocation.layoutManager = LinearLayoutManager(requireContext())
@@ -52,11 +50,7 @@ class Locations : BaseFragment<LocationViewModel, FragmentLocationsBinding>(R.la
         }
     }
 
-    fun setupListeners(id: Int,name: String) {
+    private fun setupListeners(id: Int,name: String) {
         findNavController().navigate(LocationsDirections.actionLocationsToDetailLocation(name,id))
     }
-
-
-
-
 }

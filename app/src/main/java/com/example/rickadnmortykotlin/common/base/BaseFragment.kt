@@ -29,7 +29,6 @@ abstract class BaseFragment<ViewModel : BaseViewModel, viewBinding : ViewBinding
         swipeRefresh()
     }
 
-
     open fun initialize() {}
 
     open fun setupObservers() {}
@@ -50,6 +49,4 @@ abstract class BaseFragment<ViewModel : BaseViewModel, viewBinding : ViewBinding
             }
         }
     }
-
-
 }

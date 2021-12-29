@@ -12,5 +12,4 @@ data class EpisodesModel(
     val air_date:String,
     @SerializedName("episode")
     val episode:String
-): IBaseDiffModel {
-}
+): IBaseDiffModel

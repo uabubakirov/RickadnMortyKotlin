@@ -1,32 +1,24 @@
 package com.example.rickadnmortykotlin.presentation.ui.fragments.characters.detailCharacter
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.example.rickadnmortykotlin.R
 import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentDetailCharacterBinding
 import com.example.rickadnmortykotlin.presentation.state.UIState
 import com.example.rickadnmortykotlin.presentation.ui.fragments.characters.CharactersViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
+
 class DetailCharacter : BaseFragment<CharactersViewModel,FragmentDetailCharacterBinding>(R.layout.fragment_detail_character){
 
-    override lateinit var binding: FragmentDetailCharacterBinding
-    override val viewModel: CharactersViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDetailCharacterBinding.inflate(inflater,container,false)
-        return binding.root
-    }
+    override val binding by viewBinding(FragmentDetailCharacterBinding :: bind)
+    override val viewModel: CharactersViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,8 +29,13 @@ class DetailCharacter : BaseFragment<CharactersViewModel,FragmentDetailCharacter
     private fun initialize1()= with(binding) {
         viewModel.data.subscribe {
             when (it) {
-                is UIState.Error -> {}
-                is UIState.Loading -> {}
+                is UIState.Error -> {
+                    Toast.makeText(requireContext(),it.error,Toast.LENGTH_SHORT).show()
+                }
+                is UIState.Loading -> {
+                    progressBar.isVisible = false
+                    group.isVisible = true
+                }
                 is UIState.Success -> {
 
                     when (it.data.status) {
@@ -56,6 +53,5 @@ class DetailCharacter : BaseFragment<CharactersViewModel,FragmentDetailCharacter
             }
         }
     }
-
 }
 

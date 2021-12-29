@@ -6,5 +6,4 @@ import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersMod
 
 class CharacterPaging(private val service:CharactersApi): BasePaging<CharactersModel, Any?>({ position ->
     service.fetchCharacters(position)
-}){
-}
+})

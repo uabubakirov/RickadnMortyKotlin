@@ -6,13 +6,10 @@ import com.example.rickadnmortykotlin.common.base.BaseViewModel
 import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
 import com.example.rickadnmortykotlin.data.repositories.CharactersRepository
 import com.example.rickadnmortykotlin.presentation.state.UIState
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import javax.inject.Inject
 
-@HiltViewModel
-class CharactersViewModel @Inject constructor(
+class CharactersViewModel constructor(
     private val repository: CharactersRepository
 ): BaseViewModel() {
 
@@ -24,6 +21,4 @@ class CharactersViewModel @Inject constructor(
     fun fetchCharacter(id: Int) {
         _data.subscribeTo { repository.fetchCharacter(id) }
     }
-
-
 }

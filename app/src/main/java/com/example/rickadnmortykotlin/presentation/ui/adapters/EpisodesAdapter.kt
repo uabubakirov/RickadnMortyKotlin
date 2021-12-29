@@ -15,7 +15,6 @@ class EpisodesAdapter(
     BaseComparator()
 ) {
 
-
     override fun onBindViewHolder(holder: EpisodesViewHolder, position: Int) {
         getItem(position)?.let {
             holder.onFill(it)
@@ -35,9 +34,8 @@ class EpisodesAdapter(
                 }
             }}
 
-            fun onFill(s: EpisodesModel) = with(binding) {
-                txtName.text = s.name
-
-            }
-
-        }}
+        fun onFill(s: EpisodesModel) = with(binding) {
+            txtName.text = s.name
+        }
+    }
+}

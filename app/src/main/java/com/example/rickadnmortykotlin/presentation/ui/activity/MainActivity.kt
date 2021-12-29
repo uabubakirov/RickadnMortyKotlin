@@ -9,9 +9,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.example.rickadnmortykotlin.R
 import com.example.rickadnmortykotlin.databinding.ActivityMainBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
@@ -31,8 +31,5 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
         binding.btmNav.setupWithNavController(navController)
         binding.toolbar.setupWithNavController(navController,appBarConfiguration)
-
     }
-
-
 }

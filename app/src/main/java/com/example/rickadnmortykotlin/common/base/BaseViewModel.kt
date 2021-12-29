@@ -3,7 +3,6 @@ package com.example.rickadnmortykotlin.common.base
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickadnmortykotlin.common.resource.Resource
-import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
 import com.example.rickadnmortykotlin.presentation.state.UIState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +30,5 @@ open class BaseViewModel: ViewModel() {
                 }
             }
         }
-
     }
 }

@@ -39,6 +39,4 @@ abstract class BasePaging<T:Any, U>(
             anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(  1)
         }
     }
-
-
 }

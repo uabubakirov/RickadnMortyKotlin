@@ -13,15 +13,15 @@ import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentEpisodesBinding
 import com.example.rickadnmortykotlin.presentation.ui.adapters.EpisodesAdapter
 import com.example.rickadnmortykotlin.presentation.ui.adapters.paging.LoadStateAdapter
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-@AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>(R.layout.fragment_episodes) {
 
     private val episodeAdapter = EpisodesAdapter(this::setupListeners)
     override val binding: FragmentEpisodesBinding by viewBinding()
-    override val viewModel: EpisodeViewModel by viewModels()
+    override val viewModel: EpisodeViewModel by viewModel()
 
     override fun initialize() = with(binding) {
         rvEpisode.layoutManager = LinearLayoutManager(requireContext())
@@ -50,13 +50,7 @@ class Episodes : BaseFragment<EpisodeViewModel, FragmentEpisodesBinding>(R.layou
         }
     }
 
-    fun setupListeners(id:Int,name: String) {
+    private fun setupListeners(id:Int,name: String) {
         findNavController().navigate(EpisodesDirections.actionEpisodesToDetailEpisode(name,id))
-
-
     }
-
-
-
-
 }

@@ -6,5 +6,4 @@ import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
 
 class EpisodePaging (private val service: EpisodesApi): BasePaging<EpisodesModel, Any?>({ position->
     service.fetchEpisodes(position)}
-) {
-}
+)

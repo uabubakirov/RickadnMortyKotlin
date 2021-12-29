@@ -19,8 +19,6 @@ class CharactersAdapter(
     BaseComparator()
 ) {
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             CharacterItemsBinding.inflate(
@@ -38,12 +36,12 @@ class CharactersAdapter(
     inner class ViewHolder(private val binding: CharacterItemsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 getItem(absoluteAdapterPosition)?.let {
-                    onItemClick(it.id,it.name)
+                    onItemClick(it.id, it.name)
                 }
             }
-            itemView.setOnLongClickListener{
+            itemView.setOnLongClickListener {
                 getItem(absoluteAdapterPosition)?.let {
                     onLongClickListener(it.image)
                 }
@@ -51,11 +49,9 @@ class CharactersAdapter(
             }
         }
 
-        fun onFill(s: CharactersModel)= with(binding) {
+        fun onFill(s: CharactersModel) = with(binding) {
             txtName.text = s.name
             imgImage.load(s.image)
         }
-
     }
-
 }

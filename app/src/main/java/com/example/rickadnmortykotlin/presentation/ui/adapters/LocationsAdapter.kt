@@ -15,11 +15,10 @@ class LocationsAdapter(
     BaseComparator()
 ) {
 
-
     override fun onBindViewHolder(holder: LocationsViewHolder, position: Int) {
         getItem(position)?.let {
-                holder.onFill(it)
-            }
+            holder.onFill(it)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationsViewHolder {
@@ -31,14 +30,13 @@ class LocationsAdapter(
        init {
            itemView.setOnClickListener {
                getItem(absoluteAdapterPosition)?.let {
-                   onItemClick(it.id,it.name)
+                   onItemClick(it.id, it.name)
                }
-           }}
+           }
+       }
 
        fun onFill(s: LocationsModel) = with(binding) {
            txtName.text = s.name
        }
-
    }
-
 }

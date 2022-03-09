@@ -3,15 +3,17 @@ package com.example.rickadnmortykotlin.presentation.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickadnmortykotlin.common.base.BaseComparator
-import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModel
+import com.example.rickadnmortykotlin.data.network.dtos.episodes.EpisodesModelDTO
 import com.example.rickadnmortykotlin.databinding.EpisodeItemsBinding
+import com.example.rickadnmortykotlin.presentation.models.EpisodesUI
 
 
 class EpisodesAdapter(
     private val onItemClick:(id: Int,name: String)->Unit
-): PagingDataAdapter<EpisodesModel, EpisodesAdapter.EpisodesViewHolder>(
+): ListAdapter<EpisodesUI, EpisodesAdapter.EpisodesViewHolder>(
     BaseComparator()
 ) {
 
@@ -34,7 +36,7 @@ class EpisodesAdapter(
                 }
             }}
 
-        fun onFill(s: EpisodesModel) = with(binding) {
+        fun onFill(s: EpisodesUI) = with(binding) {
             txtName.text = s.name
         }
     }

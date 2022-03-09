@@ -10,22 +10,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-open class BaseViewModel: ViewModel() {
+abstract class BaseViewModel: ViewModel() {
 
-    protected fun <T> MutableStateFlow<UIState<T>>.subscribeTo(
-        request: () -> Flow<Resource<T>>,
-    ){
+    protected fun <T, S> Flow<Resource<T>>.collectRequest(
+        state: MutableStateFlow<UIState<S>>,
+        mappedData: (T) -> S,
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
-            request().collect {
-                when(it){
-                    is Resource.Error -> it.message?.let{ error ->
-                        this@subscribeTo.value = UIState.Error(error)
-                    }
+            this@collectRequest.collect {
+                when (it) {
                     is Resource.Loading -> {
-                        this@subscribeTo.value = UIState.Loading()
+                        state.value = UIState.Loading()
+                    }
+                    is Resource.Error -> it.message?.let { error ->
+                        state.value = UIState.Error(error)
                     }
                     is Resource.Success -> it.data?.let { data ->
-                        this@subscribeTo.value = UIState.Success(data)
+                        state.value = UIState.Success(mappedData(data))
                     }
                 }
             }

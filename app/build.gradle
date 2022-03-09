@@ -56,15 +56,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    //Retrofit
-    def retrofit_version = '2.9.0'
-    def okHttp_version = '4.8.0'
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    //noinspection GradleDependency
-    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
-    //noinspection GradleDependency
-    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+        //Retrofit
+        def retrofit_version = '2.9.0'
+        def okHttp_version = '4.8.0'
+        implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+        implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+        //noinspection GradleDependency
+        implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+        //noinspection GradleDependency
+        implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
 
     //Paging
     def paging_version = "3.1.0"

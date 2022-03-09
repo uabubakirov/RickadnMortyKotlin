@@ -1,11 +1,12 @@
 package com.example.rickadnmortykotlin.data.network.dtos.locations
 
 import com.example.rickadnmortykotlin.common.base.IBaseDiffModel
+import com.example.rickadnmortykotlin.domain.models.LocationModel
 import com.google.gson.annotations.SerializedName
 
-data class LocationsModel(
+data class LocationsModelDTO(
     @SerializedName("id")
-    override val id: Int,
+    val id: Int,
     @SerializedName("name")
     val name:String,
     @SerializedName("type")
@@ -13,4 +14,7 @@ data class LocationsModel(
     @SerializedName("dimension")
     val dimension: String
 
-): IBaseDiffModel
+)
+fun LocationsModelDTO.toDomain() = LocationModel(
+    id,name,type,dimension
+)

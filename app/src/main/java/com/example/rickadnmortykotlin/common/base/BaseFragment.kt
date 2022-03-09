@@ -26,7 +26,7 @@ abstract class BaseFragment<ViewModel : BaseViewModel, viewBinding : ViewBinding
         initialize()
         setupObservers()
         setupRequests()
-        swipeRefresh()
+        scrollListener()
     }
 
     open fun initialize() {}
@@ -35,7 +35,7 @@ abstract class BaseFragment<ViewModel : BaseViewModel, viewBinding : ViewBinding
 
     open fun setupRequests() {}
 
-    open fun swipeRefresh() {}
+    open fun scrollListener() {}
 
     open fun <T> StateFlow<UIState<T>>.subscribe(
         state: Lifecycle.State = Lifecycle.State.STARTED,

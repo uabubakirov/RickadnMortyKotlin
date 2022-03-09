@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.load
 import com.example.rickadnmortykotlin.R
@@ -12,22 +13,21 @@ import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentDetailCharacterBinding
 import com.example.rickadnmortykotlin.presentation.state.UIState
 import com.example.rickadnmortykotlin.presentation.ui.fragments.characters.CharactersViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-class DetailCharacter : BaseFragment<CharactersViewModel,FragmentDetailCharacterBinding>(R.layout.fragment_detail_character){
+@AndroidEntryPoint
+class DetailCharacter : BaseFragment<DetailCharacterViewModel,FragmentDetailCharacterBinding>(R.layout.fragment_detail_character){
 
     override val binding by viewBinding(FragmentDetailCharacterBinding :: bind)
-    override val viewModel: CharactersViewModel by viewModel()
+    override val viewModel: DetailCharacterViewModel by viewModels()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun initialize() {
         viewModel.fetchCharacter(DetailCharacterArgs.fromBundle(requireArguments()).id)
-        initialize1()
     }
 
-    private fun initialize1()= with(binding) {
-        viewModel.data.subscribe {
+    override fun setupRequests()= with(binding) {
+        viewModel.stateCharacterDetail.subscribe {
             when (it) {
                 is UIState.Error -> {
                     Toast.makeText(requireContext(),it.error,Toast.LENGTH_SHORT).show()

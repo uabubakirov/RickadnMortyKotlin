@@ -2,16 +2,18 @@ package com.example.rickadnmortykotlin.presentation.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
+
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickadnmortykotlin.common.base.BaseComparator
-import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
+
 import com.example.rickadnmortykotlin.databinding.LocationItemsBinding
+import com.example.rickadnmortykotlin.presentation.models.LocationUI
 
 
 class LocationsAdapter(
     private val onItemClick:(id: Int,name:String)->Unit,
-) : PagingDataAdapter<LocationsModel, LocationsAdapter.LocationsViewHolder>(
+) : ListAdapter<LocationUI, LocationsAdapter.LocationsViewHolder>(
     BaseComparator()
 ) {
 
@@ -35,7 +37,7 @@ class LocationsAdapter(
            }
        }
 
-       fun onFill(s: LocationsModel) = with(binding) {
+       fun onFill(s: LocationUI) = with(binding) {
            txtName.text = s.name
        }
    }

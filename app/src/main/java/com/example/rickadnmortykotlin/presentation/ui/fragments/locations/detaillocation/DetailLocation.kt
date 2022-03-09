@@ -10,20 +10,21 @@ import com.example.rickadnmortykotlin.common.base.BaseFragment
 import com.example.rickadnmortykotlin.databinding.FragmentDetailLocationBinding
 import com.example.rickadnmortykotlin.presentation.state.UIState
 import com.example.rickadnmortykotlin.presentation.ui.fragments.locations.LocationViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
-class DetailLocation : BaseFragment<LocationViewModel, FragmentDetailLocationBinding>(R.layout.fragment_detail_location) {
+@AndroidEntryPoint
+class DetailLocation : BaseFragment<DetailLocationViewModel, FragmentDetailLocationBinding>(R.layout.fragment_detail_location) {
 
     override val binding by viewBinding(FragmentDetailLocationBinding :: bind)
-    override val viewModel: LocationViewModel by viewModel()
+    override val viewModel: DetailLocationViewModel by viewModels()
 
     override fun initialize() {
         viewModel.fetchLocation(DetailLocationArgs.fromBundle(requireArguments()).id)
     }
 
     override fun setupObservers() = with(binding) {
-        viewModel.dataLocations.subscribe {
+        viewModel.stateLocationsDetail.subscribe {
             when(it){
                 is UIState.Error -> {
                     Toast.makeText(requireContext(),it.error,Toast.LENGTH_SHORT).show()

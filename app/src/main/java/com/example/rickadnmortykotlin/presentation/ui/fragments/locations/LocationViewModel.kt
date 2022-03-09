@@ -1,24 +1,38 @@
 package com.example.rickadnmortykotlin.presentation.ui.fragments.locations
 
-import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
+import com.example.rickadnmortykotlin.common.base.BaseRequest
 import com.example.rickadnmortykotlin.common.base.BaseViewModel
-import com.example.rickadnmortykotlin.data.network.dtos.locations.LocationsModel
-import com.example.rickadnmortykotlin.data.repositories.LocationsRepository
+import com.example.rickadnmortykotlin.domain.usecases.FetchLocationsUseCase
+import com.example.rickadnmortykotlin.presentation.models.LocationUI
+import com.example.rickadnmortykotlin.presentation.models.toUI
 import com.example.rickadnmortykotlin.presentation.state.UIState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
+
+@HiltViewModel
+class LocationViewModel @Inject constructor(private val locationsUseCase: FetchLocationsUseCase): BaseViewModel(),BaseRequest {
+
+    private val _stateLocationsDetail = MutableStateFlow<UIState<List<LocationUI>>>(UIState.Loading())
+    val stateLocations: StateFlow<UIState<List<LocationUI>>> = _stateLocationsDetail
+    override var page: Int = 1
+    var count = 0
+    init {
+        fetchLocations(page)
+    }
+
+    override fun fetchLocations(page: Int) {
+        locationsUseCase(page).collectRequest(_stateLocationsDetail){it.map { data ->data.toUI() }}
+    }
 
 
-class LocationViewModel constructor(private val repository:LocationsRepository): BaseViewModel() {
+    override fun fetchCharacters(page: Int) {
+        TODO("Not yet implemented")
+    }
 
-    fun fetchLocations() = repository.fetchLocations().cachedIn(viewModelScope)
-
-    private val _dataLocations = MutableStateFlow<UIState<LocationsModel>>(UIState.Loading())
-    val dataLocations: StateFlow<UIState<LocationsModel>> = _dataLocations
-
-    fun fetchLocation(id: Int) {
-        _dataLocations.subscribeTo { repository.fetchLocation(id) }
+    override fun fetchEpisodes(page: Int) {
+        TODO("Not yet implemented")
     }
 
  }

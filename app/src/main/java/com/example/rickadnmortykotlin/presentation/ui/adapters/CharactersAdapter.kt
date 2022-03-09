@@ -3,19 +3,20 @@ package com.example.rickadnmortykotlin.presentation.ui.adapters
 import android.view.LayoutInflater
 
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.ListAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.rickadnmortykotlin.common.base.BaseComparator
-import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModel
+import com.example.rickadnmortykotlin.data.network.dtos.characters.CharactersModelDTO
 import com.example.rickadnmortykotlin.databinding.CharacterItemsBinding
+import com.example.rickadnmortykotlin.presentation.models.CharactersUI
 
 
 class CharactersAdapter(
     private val onItemClick:(id: Int,name: String)-> Unit,
     private val onLongClickListener:(image:String)-> Unit
-                        ): PagingDataAdapter<CharactersModel,CharactersAdapter.ViewHolder>(
+                        ): ListAdapter<CharactersUI,CharactersAdapter.ViewHolder>(
     BaseComparator()
 ) {
 
@@ -49,7 +50,7 @@ class CharactersAdapter(
             }
         }
 
-        fun onFill(s: CharactersModel) = with(binding) {
+        fun onFill(s: CharactersUI) = with(binding) {
             txtName.text = s.name
             imgImage.load(s.image)
         }

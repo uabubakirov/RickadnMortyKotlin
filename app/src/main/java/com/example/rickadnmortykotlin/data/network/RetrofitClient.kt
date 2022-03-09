@@ -1,4 +1,4 @@
-package com.example.rickadnmortykotlin.data
+package com.example.rickadnmortykotlin.data.network
 
 import com.example.rickadnmortykotlin.data.network.apiservices.CharactersApi
 import com.example.rickadnmortykotlin.data.network.apiservices.EpisodesApi

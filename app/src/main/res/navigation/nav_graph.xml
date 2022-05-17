@@ -96,5 +96,15 @@
         android:name="com.example.rickadnmortykotlin.presentation.ui.fragments.all.AllFragment"
         android:label="fragment_all"
         tools:layout="@layout/fragment_all" />
+    <dialog
+        android:id="@+id/filterEpisode"
+        android:name="com.example.rickadnmortykotlin.presentation.ui.fragments.episodes.filter.FilterEpisode"
+        android:label="fragment_filter_episode"
+        tools:layout="@layout/fragment_filter_episode" />
+    <dialog
+        android:id="@+id/locationFilter"
+        android:name="com.example.rickadnmortykotlin.presentation.ui.fragments.locations.filter.LocationFilter"
+        android:label="fragment_location_filter"
+        tools:layout="@layout/fragment_location_filter" />
 
 </navigation>

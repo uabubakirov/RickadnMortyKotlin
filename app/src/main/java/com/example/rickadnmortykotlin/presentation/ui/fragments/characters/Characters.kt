@@ -38,7 +38,6 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
     override val binding by viewBinding(FragmentCharactersBinding::bind)
     override val viewModel: CharactersViewModel by viewModels()
     private var filterData: FilterData? = FilterData()
-    private var currentText = ""
 
     override fun initialize() = with(binding) {
         rvCharacter.layoutManager = LinearLayoutManager(requireContext())
@@ -71,7 +70,7 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
                     }
                 }
             }}else{
-                viewModel.fetchCharactersByGenderAndStatus(filterData?.gender,viewModel.page,filterData?.status)
+                viewModel.fetchCharactersByGenderAndStatus(filterData?.param2,viewModel.page,filterData?.param1)
                 viewModel.stateFilterCharacters.subscribe {
                     when(it){
                         is UIState.Error -> {showToast("error")}
@@ -92,15 +91,16 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    if (binding.seatch.text.toString() == ""){
                     if(filterData != null){
                         viewModel.page++
-                        viewModel.fetchCharactersByGenderAndStatus(filterData?.gender,viewModel.page,filterData?.status)
+                        viewModel.fetchCharactersByGenderAndStatus(filterData?.param2,viewModel.page,filterData?.param1)
                         Log.d("filter", "${viewModel.page}")
                     }else{
                         viewModel.page++
                         viewModel.fetchCharacters(viewModel.page)
                         Log.d("prost", "${viewModel.page}")
-                    }
+                    }}
 
 
                 }
@@ -109,34 +109,28 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
     }
 
     override fun setupListeners() {
-//        search()
+        search()
         binding.btnSave.setOnClickListener {
             findNavController().navigate(R.id.characterFilter2)
         }
     }
 
-//    private fun search() = with(binding) {
-//        val handler = Handler(Looper.getMainLooper())
-//        val searchRunnable = Runnable {
-//            viewModel.fetchCharacterBySearch(currentText)
-//        }
-//        binding.seatch.doAfterTextChanged {
-//            currentText = it?.toString() ?: ""
-//            handler.removeCallbacks(searchRunnable)
-//            handler.postDelayed(searchRunnable, 500L)
-//        }
-//
-//        viewModel.stateFilterCharacters.subscribe {
-//            when(it){
-//                is UIState.Error -> {}
-//                is UIState.Loading -> {
-//                    }
-//                is UIState.Success -> {
-//                    charactersAdapter.submitList(it.data)
-//                }
-//            }
-//        }
-//    }
+    private fun search() = with(binding) {
+        btnSearch.setOnClickListener {
+            viewModel.fetchCharacterBySearch(seatch.text.toString())
+            viewModel.stateFilterCharacters.subscribe {
+                when(it){
+                    is UIState.Error -> {}
+                    is UIState.Loading -> {
+                    }
+                    is UIState.Success -> {
+                        charactersAdapter.submitList(it.data)
+                    }
+                }
+            }
+        }
+
+    }
 
     private fun clickCharacter(id: Int, name: String) {
         findNavController().navigate(

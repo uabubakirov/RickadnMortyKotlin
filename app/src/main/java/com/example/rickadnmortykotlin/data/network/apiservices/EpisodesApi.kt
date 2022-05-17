@@ -12,4 +12,10 @@ interface EpisodesApi {
 
     @GET("/api/episode/{id}")
     suspend fun fetchEpisode(@Path("id")id:Int): EpisodesModelDTO
+
+    @GET("/api/episode")
+    suspend fun fetchEpisodeByEpisodeAndName(@Query("name") name: String?,
+                                             @Query("episode") episode: String?):RickAndMortyResponse<EpisodesModelDTO>
+
+
 }

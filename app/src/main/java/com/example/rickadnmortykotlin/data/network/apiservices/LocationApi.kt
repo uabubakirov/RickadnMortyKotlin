@@ -13,4 +13,9 @@ interface LocationApi {
 
     @GET("/api/location/{id}")
     suspend fun fetchLocation(@Path("id")id:Int): LocationsModelDTO
+
+    @GET("/api/location")
+    suspend fun fetchLocationsByAllFilters(@Query("name") name: String?,
+                                           @Query("type") type: String?,
+                                           @Query("dimension") dimension: String?):RickAndMortyResponse<LocationsModelDTO>
 }

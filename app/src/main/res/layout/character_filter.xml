@@ -3,102 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
+    android:background="@color/gray"
     tools:context=".presentation.ui.fragments.characters.filter.CharacterFilter"
     xmlns:app="http://schemas.android.com/apk/res-auto">
- <RadioGroup
-     android:id="@+id/group_gender"
-     android:layout_width="match_parent"
-     app:layout_constraintTop_toTopOf="parent"
-     android:orientation="horizontal"
-     android:layout_height="wrap_content">
-
-     <androidx.appcompat.widget.AppCompatRadioButton
-         android:id="@+id/btn_male"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginLeft="10dp"
-         android:text="male"
-         app:layout_constraintLeft_toLeftOf="parent"
-         app:layout_constraintTop_toTopOf="parent" />
-
-     <androidx.appcompat.widget.AppCompatRadioButton
-         android:id="@+id/btn_female"
-         android:layout_width="wrap_content"
-         android:layout_marginLeft="10dp"
-         android:layout_height="wrap_content"
-         android:text="female"
-         app:layout_constraintLeft_toRightOf="@id/btn_male"
-         app:layout_constraintTop_toTopOf="parent" />
-
-     <androidx.appcompat.widget.AppCompatRadioButton
-         android:id="@+id/btn_genderless"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:text="genderless"
-         android:layout_marginLeft="10dp"
-         app:layout_constraintLeft_toRightOf="@id/btn_male"
-         app:layout_constraintTop_toTopOf="parent" />
-     <androidx.appcompat.widget.AppCompatRadioButton
-         android:id="@+id/btn_unknown"
-         android:layout_width="wrap_content"
-         android:layout_marginLeft="10dp"
-         android:layout_height="wrap_content"
-         android:text="unknown"
-         app:layout_constraintLeft_toRightOf="@id/btn_male"
-         app:layout_constraintTop_toTopOf="parent" />
- </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/group_status"
+    <TextView
+        android:id="@+id/txt_gender"
+        android:layout_width="wrap_content"
+        android:text="Пол"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <Spinner
+        app:layout_constraintTop_toBottomOf="@id/txt_gender"
+        android:id="@+id/spinner_gender"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/group_gender"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/alive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="alive"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/dead"
-            android:layout_width="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_height="wrap_content"
-            android:text="dead"
-            app:layout_constraintLeft_toRightOf="@id/btn_male"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/unknown"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="unknown"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintLeft_toRightOf="@id/btn_male"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </RadioGroup>
+        android:spinnerMode="dialog"
+        android:entries="@array/gender_array"
+        android:layout_height="60dp"/>
+    <TextView
+        android:id="@+id/txt_status"
+        android:layout_width="wrap_content"
+        android:text="Статус"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/spinner_gender"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <Spinner
+        app:layout_constraintTop_toBottomOf="@id/txt_status"
+        android:id="@+id/spinner_status"
+        android:layout_width="match_parent"
+        android:entries="@array/status_array"
+        android:spinnerMode="dialog"
+        android:layout_height="60dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/group_status"
+        android:layout_width="50dp"
+        android:background="@drawable/ic_baseline_save_24"
+        app:layout_constraintTop_toBottomOf="@id/spinner_status"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="50dp"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_reset"
-        android:layout_width="wrap_content"
-        android:text="reset"
-        app:layout_constraintTop_toBottomOf="@id/group_status"
-        app:layout_constraintLeft_toRightOf="@id/btn_save"
-        android:layout_height="wrap_content"/>
+        android:layout_width="50dp"
+        android:background="@drawable/ic_baseline_refresh_24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_status"
+        android:layout_height="50dp"/>
 
 
 

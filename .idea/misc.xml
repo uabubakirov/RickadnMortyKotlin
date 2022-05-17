@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/character_filter.xml" value="0.4" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/drawable/ic_filter.xml" value="0.1" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/character_filter.xml" value="0.1" />
         <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/character_items.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_all.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/episode_items.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_all.xml" value="0.1" />
         <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_characters.xml" value="0.264" />
         <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_episodes.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_filter_episode.xml" value="0.1" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_location_filter.xml" value="0.264" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/fragment_locations.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/location_items.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Uran/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/menu/menu.xml" value="0.11851851851851852" />
         <entry key="..\:/Users/User/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/User/AndroidStudioProjects/RickadnMortyKotlin/app/src/main/res/layout/character_items.xml" value="0.12360688956433637" />

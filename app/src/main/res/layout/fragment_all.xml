@@ -6,25 +6,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.fragments.all.AllFragment">
 
-
-    <EditText
-        android:id="@+id/search"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="10dp"
+        android:background="@color/gray"
+        android:layout_marginHorizontal="30dp"
+        app:cardCornerRadius="20dp"
+        android:layout_height="40dp">
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/search"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        <EditText
+            android:background="@color/gray"
+            android:hint="Введите имя"
+            android:id="@+id/search"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_all"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_search"
+        app:layout_constraintTop_toBottomOf="@id/card"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

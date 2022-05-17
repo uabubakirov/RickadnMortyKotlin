@@ -23,5 +23,13 @@ class LocationsRepositoryImpl @Inject constructor(private val service: LocationA
         service.fetchLocation(id).toDomain()
     }
 
+    override fun fetchLocationByAllFilter(
+        name: String?,
+        type: String?,
+        dimension: String?
+    )= doRequest {
+        service.fetchLocationsByAllFilters(name,type,dimension).results.map { it.toDomain() }
+    }
+
 
 }

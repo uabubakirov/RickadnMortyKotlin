@@ -11,4 +11,6 @@ interface EpisodesRepository  {
 
     fun fetchEpisode(id: Int): Flow<Resource<EpisodeModel>>
 
+    fun fetchEpisodesByEpisodeAndName(name: String?,episode: String?): Flow<Resource<List<EpisodeModel>>>
+
 }

@@ -21,7 +21,12 @@ class EpisodesRepositoryImpl @Inject constructor(private val service:EpisodesApi
         service.fetchEpisode(id).toDomain()
     }
 
-
+    override fun fetchEpisodesByEpisodeAndName(
+        name: String?,
+        episode: String?
+    ) = doRequest {
+        service.fetchEpisodeByEpisodeAndName(name,episode).results.map { it.toDomain() }
+    }
 
 
 }

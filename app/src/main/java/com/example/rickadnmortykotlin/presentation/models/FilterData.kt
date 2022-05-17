@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class FilterData(
-    val gender: String? = null,
-    val status: String? = null
+    val param1: String? = null,
+    val param2: String? = null,
+    val param3: String? = null
 ):Parcelable

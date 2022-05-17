@@ -39,7 +39,7 @@ class CharactersAdapter(
         init {
             itemView.setOnClickListener {
                 getItem(absoluteAdapterPosition)?.let {
-                    onItemClick(it.id, it.name)
+                    it.id?.let { it1 -> onItemClick(it1, it.name) }
                 }
             }
             itemView.setOnLongClickListener {

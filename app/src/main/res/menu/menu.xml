@@ -12,4 +12,9 @@
         android:id="@+id/episodes"
         android:icon="@drawable/ic_episode"
         android:title="Episodes" />
+
+    <item
+        android:id="@+id/all"
+        android:icon="@drawable/ic_inclusive"
+        android:title="all" />
 </menu>

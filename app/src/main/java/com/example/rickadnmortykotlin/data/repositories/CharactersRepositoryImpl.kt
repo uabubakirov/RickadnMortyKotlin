@@ -1,6 +1,7 @@
 package com.example.rickadnmortykotlin.data.repositories
 
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -20,11 +21,24 @@ class CharactersRepositoryImpl @Inject constructor(
 
 
     override fun fetchCharacters(page: Int) = doRequest {
-            service.fetchCharacters(page).results.map { it.toDomain() }
+        service.fetchCharacters(page).results.map { it.toDomain() }
     }
 
     override fun fetchCharacter(id: Int) = doRequest {
         service.fetchCharacter(id).toDomain()
     }
+
+    override fun fetchCharactersByGenderAndGender(
+        page: Int,
+        gender: String?,
+        status: String?
+    ) = doRequest {
+        service.fetchCharactersByGenderAndStatus(gender,status,page).results.map { it.toDomain() }
+    }
+
+    override fun fetchCharacterBySearch(name: String,page: Int) = doRequest {
+        service.fetchBySearchCharacters(name,page).results.map { it.toDomain() }
+    }
+
 }
 

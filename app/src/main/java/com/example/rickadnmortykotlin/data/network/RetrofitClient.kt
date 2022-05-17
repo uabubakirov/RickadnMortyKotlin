@@ -1,5 +1,6 @@
 package com.example.rickadnmortykotlin.data.network
 
+import com.example.rickadnmortykotlin.data.network.apiservices.AllApi
 import com.example.rickadnmortykotlin.data.network.apiservices.CharactersApi
 import com.example.rickadnmortykotlin.data.network.apiservices.EpisodesApi
 import com.example.rickadnmortykotlin.data.network.apiservices.LocationApi
@@ -36,7 +37,11 @@ class RetrofitClient {
         LocationApi::class.java
     )
 
-    fun provideEpisodeApi():EpisodesApi = provideRetrofitClient.create(
+    fun provideEpisodeApi(): EpisodesApi = provideRetrofitClient.create(
         EpisodesApi::class.java
+    )
+
+    fun provideAllApi():AllApi = provideRetrofitClient.create(
+        AllApi::class.java
     )
 }

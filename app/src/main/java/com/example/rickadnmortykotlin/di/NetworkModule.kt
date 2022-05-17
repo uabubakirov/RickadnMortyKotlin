@@ -24,4 +24,8 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideEpisodes() = retrofitClient.provideEpisodeApi()
+
+    @Provides
+    @Singleton
+    fun provideAll() = retrofitClient.provideAllApi()
 }

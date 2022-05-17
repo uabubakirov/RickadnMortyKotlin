@@ -10,7 +10,7 @@ data class CharactersUI(
     val status:String,
     val species:String,
     val type:String,
-    val gender:String, override val id: Int
+    val gender:String, override val id: Int?
 ):IBaseDiffModel
 fun CharactersModel.toUI() = CharactersUI(
     name,

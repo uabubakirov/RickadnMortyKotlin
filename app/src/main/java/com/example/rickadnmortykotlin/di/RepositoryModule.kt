@@ -1,8 +1,10 @@
 package com.example.rickadnmortykotlin.di
 
+import com.example.rickadnmortykotlin.data.repositories.AllRepoImpl
 import com.example.rickadnmortykotlin.data.repositories.CharactersRepositoryImpl
 import com.example.rickadnmortykotlin.data.repositories.EpisodesRepositoryImpl
 import com.example.rickadnmortykotlin.data.repositories.LocationsRepositoryImpl
+import com.example.rickadnmortykotlin.domain.repositories.AllRepo
 import com.example.rickadnmortykotlin.domain.repositories.CharactersRepository
 import com.example.rickadnmortykotlin.domain.repositories.EpisodesRepository
 import com.example.rickadnmortykotlin.domain.repositories.LocationRepository
@@ -30,5 +32,9 @@ abstract class RepositoryModule {
         locationRepositoryImpl: LocationsRepositoryImpl
     ): LocationRepository
 
+    @Binds
+    abstract fun provideAllRepository(
+        allRepoImpl: AllRepoImpl
+    ): AllRepo
 
 }

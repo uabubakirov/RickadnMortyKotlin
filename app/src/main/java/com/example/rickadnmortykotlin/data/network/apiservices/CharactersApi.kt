@@ -12,4 +12,13 @@ interface  CharactersApi {
 
     @GET("/api/character/{id}")
     suspend fun fetchCharacter(@Path("id")id: Int): CharactersModelDTO
+
+    @GET("/api/character")
+    suspend fun fetchBySearchCharacters(@Query("name") name: String,
+                                        @Query("page") page: Int):RickAndMortyResponse<CharactersModelDTO>
+
+    @GET("/api/character")
+    suspend fun fetchCharactersByGenderAndStatus(@Query("gender") gender: String?,
+                                                 @Query("status") status: String?,
+                                                 @Query("page") page: Int):RickAndMortyResponse<CharactersModelDTO>
 }

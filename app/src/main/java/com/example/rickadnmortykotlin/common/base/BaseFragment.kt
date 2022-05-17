@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import com.example.rickadnmortykotlin.presentation.state.UIState
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,11 +28,14 @@ abstract class BaseFragment<ViewModel : BaseViewModel, viewBinding : ViewBinding
         setupObservers()
         setupRequests()
         scrollListener()
+        setupListeners()
     }
 
     open fun initialize() {}
 
     open fun setupObservers() {}
+
+    open fun setupListeners(){}
 
     open fun setupRequests() {}
 
@@ -41,7 +45,7 @@ abstract class BaseFragment<ViewModel : BaseViewModel, viewBinding : ViewBinding
         state: Lifecycle.State = Lifecycle.State.STARTED,
         action: (UIState<T>) -> Unit
     ){
-        viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.async {
             viewLifecycleOwner.repeatOnLifecycle(state){
                 this@subscribe.collect{
                     action(it)

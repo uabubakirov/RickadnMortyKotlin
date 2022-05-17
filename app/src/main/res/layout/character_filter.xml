@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    tools:context=".presentation.ui.fragments.characters.filter.CharacterFilter"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+ <RadioGroup
+     android:id="@+id/group_gender"
+     android:layout_width="match_parent"
+     app:layout_constraintTop_toTopOf="parent"
+     android:orientation="horizontal"
+     android:layout_height="wrap_content">
+
+     <androidx.appcompat.widget.AppCompatRadioButton
+         android:id="@+id/btn_male"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:text="male"
+         app:layout_constraintLeft_toLeftOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+
+     <androidx.appcompat.widget.AppCompatRadioButton
+         android:id="@+id/btn_female"
+         android:layout_width="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:layout_height="wrap_content"
+         android:text="female"
+         app:layout_constraintLeft_toRightOf="@id/btn_male"
+         app:layout_constraintTop_toTopOf="parent" />
+
+     <androidx.appcompat.widget.AppCompatRadioButton
+         android:id="@+id/btn_genderless"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="genderless"
+         android:layout_marginLeft="10dp"
+         app:layout_constraintLeft_toRightOf="@id/btn_male"
+         app:layout_constraintTop_toTopOf="parent" />
+     <androidx.appcompat.widget.AppCompatRadioButton
+         android:id="@+id/btn_unknown"
+         android:layout_width="wrap_content"
+         android:layout_marginLeft="10dp"
+         android:layout_height="wrap_content"
+         android:text="unknown"
+         app:layout_constraintLeft_toRightOf="@id/btn_male"
+         app:layout_constraintTop_toTopOf="parent" />
+ </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/group_status"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/group_gender"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/alive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="alive"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/dead"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:text="dead"
+            app:layout_constraintLeft_toRightOf="@id/btn_male"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/unknown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="unknown"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@id/btn_male"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </RadioGroup>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/group_status"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_reset"
+        android:layout_width="wrap_content"
+        android:text="reset"
+        app:layout_constraintTop_toBottomOf="@id/group_status"
+        app:layout_constraintLeft_toRightOf="@id/btn_save"
+        android:layout_height="wrap_content"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

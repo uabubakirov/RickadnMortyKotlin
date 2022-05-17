@@ -16,6 +16,7 @@
         <action
             android:id="@+id/action_characters_to_detailImage"
             app:destination="@id/detailImage" />
+
     </fragment>
     <fragment
         android:id="@+id/episodes"
@@ -81,4 +82,19 @@
             android:name="image"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/characterFilter2"
+        android:name="com.example.rickadnmortykotlin.presentation.ui.fragments.characters.filter.CharacterFilter"
+        android:label="character_filter"
+        tools:layout="@layout/character_filter" >
+        <action
+            android:id="@+id/action_characterFilter2_to_characters"
+            app:destination="@id/characters" />
+    </dialog>
+    <fragment
+        android:id="@+id/all"
+        android:name="com.example.rickadnmortykotlin.presentation.ui.fragments.all.AllFragment"
+        android:label="fragment_all"
+        tools:layout="@layout/fragment_all" />
+
 </navigation>

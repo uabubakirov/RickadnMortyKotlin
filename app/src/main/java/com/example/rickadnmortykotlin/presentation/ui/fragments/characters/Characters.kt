@@ -73,8 +73,8 @@ class Characters : BaseFragment<CharactersViewModel, FragmentCharactersBinding>(
                 viewModel.fetchCharactersByGenderAndStatus(filterData?.param2,viewModel.page,filterData?.param1)
                 viewModel.stateFilterCharacters.subscribe {
                     when(it){
-                        is UIState.Error -> {showToast("error")}
-                        is UIState.Loading -> {showToast("load")}
+                        is UIState.Error -> {}
+                        is UIState.Loading -> {}
                         is UIState.Success -> {
                             val list = ArrayList<CharactersUI>(charactersAdapter.currentList)
                             it.data.let { data -> list.addAll(data) }
